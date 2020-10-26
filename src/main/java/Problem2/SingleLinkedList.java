@@ -11,24 +11,69 @@ public class SingleLinkedList {
     }
 
     // copy constructor
-    public SingleLinkedList(SingleLinkedList list) {
+    public SingleLinkedList(SingleLinkedList list) {//creates the link list
         // homework
-    }
+        if(list == null){
+            return;
+        }
 
+        ListNode h1 = new ListNode();
+        head = h1;
+        ListNode h2 = list.head.next;
+
+        while(h2 != null){
+            h1.next = new ListNode(h2.val);
+            h1 = h1.next;
+            h2 = h2.next;
+        }
+        size = list.size;
+    }
     public int removeAll(int valueToRemove) {
         // homework
         // in-place
-        return -1; // place holder
+        int count = 0;
+        ListNode h1 = head;
+        ListNode h2 = head.next;
+        if(h1.next == null){
+            return 0;
+        }
+        while(h2 != null){
+            int current = h2.val;
+            if(current == valueToRemove){
+                h1.next = h2.next;
+                size--;
+                count++;
+            }
+            if(h2.next != null && current != valueToRemove) {
+                h1 = h2;
+                h2 = h2.next;
+            } else if(current == valueToRemove){
+                h2 = h2.next;
+            } else {
+                h2 = null;
+            }
+        }
+        return count;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
         // homework
         // in-place
+        if(head.next == null || head.next.next == null){
+            return;
+        }
+        ListNode h1 = head.next;
+        ListNode h2 = head.next.next;
+        while(h2 != null){
+            h1.next = h2.next;
+            h2.next = head.next;
+            head.next = h2;
+            h2 = h1.next;
+        }
     }
 
     // do not change any function below
-
     public SingleLinkedList(int[] data) {
         this();
         if (data == null) {
@@ -41,7 +86,6 @@ public class SingleLinkedList {
             size++;
         }
     }
-
     // Appends the specified element to the end of this list
     public void add(int val) {
         size++;
@@ -72,7 +116,6 @@ public class SingleLinkedList {
         if (!(obj instanceof SingleLinkedList)) {
             return false;
         }
-
         SingleLinkedList otherList = (SingleLinkedList) obj;
 
         if (this.size != otherList.size) {
@@ -89,7 +132,6 @@ public class SingleLinkedList {
         }
         return (n1 == null && n2 == null);
     }
-
     public int getSize() {
         return size;
     }
