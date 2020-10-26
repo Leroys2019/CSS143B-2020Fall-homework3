@@ -11,20 +11,20 @@ public class SingleLinkedList {
     }
 
     // copy constructor
-    public SingleLinkedList(SingleLinkedList list) {
+    public SingleLinkedList(SingleLinkedList list) {//creates the link list
         // homework
         if(list == null){
             return;
         }
 
-        ListNode p1 = new ListNode();
-        head = p1;
-        ListNode p2 = list.head.next;
+        ListNode h1 = new ListNode();
+        head = h1;
+        ListNode h2 = list.head.next;
 
-        while(p2 != null){
-            p1.next = new ListNode(p2.val);
-            p1 = p1.next;
-            p2 = p2.next;
+        while(h2 != null){
+            h1.next = new ListNode(h2.val);
+            h1 = h1.next;
+            h2 = h2.next;
         }
         size = list.size;
     }
@@ -32,25 +32,25 @@ public class SingleLinkedList {
         // homework
         // in-place
         int count = 0;
-        ListNode p1 = head;
-        ListNode p2 = head.next;
-        if(p1.next == null){
+        ListNode h1 = head;
+        ListNode h2 = head.next;
+        if(h1.next == null){
             return 0;
         }
-        while(p2 != null){
-            int current = p2.val;
+        while(h2 != null){
+            int current = h2.val;
             if(current == valueToRemove){
-                p1.next = p2.next;
+                h1.next = h2.next;
                 size--;
                 count++;
             }
-            if(p2.next != null && current != valueToRemove) {
-                p1 = p2;
-                p2 = p2.next;
+            if(h2.next != null && current != valueToRemove) {
+                h1 = h2;
+                h2 = h2.next;
             } else if(current == valueToRemove){
-                p2 = p2.next;
+                h2 = h2.next;
             } else {
-                p2 = null;
+                h2 = null;
             }
         }
         return count;
@@ -63,21 +63,17 @@ public class SingleLinkedList {
         if(head.next == null || head.next.next == null){
             return;
         }
-
-        ListNode p1 = head.next;
-        ListNode p2 = head.next.next;
-
-        while(p2 != null){
-            p1.next = p2.next;
-            p2.next = head.next;
-            head.next = p2;
-
-            p2 = p1.next;
+        ListNode h1 = head.next;
+        ListNode h2 = head.next.next;
+        while(h2 != null){
+            h1.next = h2.next;
+            h2.next = head.next;
+            head.next = h2;
+            h2 = h1.next;
         }
     }
 
     // do not change any function below
-
     public SingleLinkedList(int[] data) {
         this();
         if (data == null) {
@@ -90,7 +86,6 @@ public class SingleLinkedList {
             size++;
         }
     }
-
     // Appends the specified element to the end of this list
     public void add(int val) {
         size++;

@@ -26,9 +26,9 @@ public class ArrayStack<T> implements Stack<T> {
     }
 
     @Override
-    public T pop() {
+    public T pop() {//Pulls out the first element at
         // homework
-        if(size == 0){
+        if(size == 0){//checks if stack is empty
             System.out.println("Stack is empty");
         }
         T val = data[size - 1];

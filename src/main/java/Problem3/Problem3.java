@@ -15,8 +15,7 @@ public class Problem3 {
         while (list.next != null) {
             stack.push(list.next);
             list = list.next;
-        }
-        while(stack.peek() != null) {
+        } while(stack.peek() != null) {
             print.println(stack.pop().val);
         }
     }
